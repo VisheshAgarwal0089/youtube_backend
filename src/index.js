@@ -7,7 +7,14 @@ if (!mongoUrl) {
     throw new Error("MONGODB_URL is missing from the .env file");
 }
 
-connectDB();
+connectDB()
+.then(()=>{
+    app.listen(process.env.PORT||8000,()=>
+    console.log(`App is listening on port ${process.env.PORT||8000}`))
+})
+.catch((err)=>{
+    console.log("MongoDB connection failed!!",err);
+})
 
 
 /*;(async () => {
